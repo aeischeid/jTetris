@@ -408,10 +408,10 @@
             if (this.isActive === 1) {
                 this.clearTimers();
                 this.isActive = 0;
-                document.getElementById("pause_control").innerHTML = "Paused"
+                //document.getElementById("pause_control").innerHTML = "Paused"
             } else {
                 this.play();
-                document.getElementById("pause_control").innerHTML = "Pause"
+                //document.getElementById("pause_control").innerHTML = "Pause"
             }
         },
         clearTimers: function () {
