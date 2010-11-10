@@ -245,6 +245,26 @@
                 this.controls.attachEvent('on' + event, cb);
             }
         },
+        toggleControls: function(){
+            var classes = this.controls.className.split(" "),
+                cls_length = classes.length,
+                hasClass = false,
+                newClassList = [];
+            this.log(classes);
+            while(cls_length--){
+                className = classes[cls_length];
+                if(className == "show_controls"){
+                    hasClass = true;
+                } else {
+                    newClassList.push(className);
+                }
+            }
+            if(hasClass == false){
+                newClassList.push("show_controls");
+            }
+            this.log(newClassList.join(" "));
+            this.controls.className = newClassList.join(" ");
+        },
         handleControl: function (e) {
             var classes = e.target.className.split(" "),
                 cls_length = classes.length,
@@ -388,8 +408,10 @@
             if (this.isActive === 1) {
                 this.clearTimers();
                 this.isActive = 0;
+                document.getElementById("pause_control").innerHTML = "Paused"
             } else {
                 this.play();
+                document.getElementById("pause_control").innerHTML = "Pause"
             }
         },
         clearTimers: function () {
@@ -653,6 +675,7 @@
 		},*/
     };
     tetris.init();
+    setTimeout(function(){tetris.toggleControls();}, 2000);
 })();
 
 if (!Array.prototype.eachdo) {

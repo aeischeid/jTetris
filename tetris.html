@@ -61,6 +61,11 @@
         background-color:transparent;
         border:1px solid #fff;
     }
+    .control.persistent {
+        position:absolute;
+        background-color:transparent;
+        border:1px solid #fff;
+    }
     div.move_left, .move_right {
         height:98px;
         width:99px;
@@ -140,8 +145,8 @@
     <div class="control move_right"><div class="for_help move_right"><span class="move_right">R</span></div></div>
     <div class="control move_down"><div class="for_help move_down"><span class="move_down">Down</span></div></div>
     <div class="control move_rotate"><div class="for_help move_rotate"><span class="move_rotate">Rotate</span></div></div>
-    <div class="control move_pause"><div class="move_pause"><span>Pause</span></div></div>
-    <div class="control move_show_controls"><div class="move_show_controls"><span>Controls</span></div></div>
+    <div class="control persistent move_pause"><div class="move_pause"><span id="pause_control" class="move_pause">Pause</span></div></div>
+    <div class="control persistent move_show_controls"><div class="move_show_controls"><span class="move_show_controls">Controls</span></div></div>
 </div>
 <script type="text/javascript" src="tetris.js"></script>
 
