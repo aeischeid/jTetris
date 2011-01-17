@@ -1,151 +1,31 @@
-<!DOCTYPE html>
-<html manifest="tetris.manifest">
-<head>
-<title>jTetris</title>
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    
+
+<!doctype html>
+<html lang="en" manifest="tetris.manifest">
+  <head>
+    <meta charset="utf-8">
+    <title>HTML5 Tetris</title>
+
+    <meta name="description" content="Tetris in a browser!">
+    <meta name="author" content="https://github.com/aeischeid/DOM-Tetris/network">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-    <link rel="apple-touch-icon" href="tetris_icon.png"/>
-    <link rel="apple-touch-startup-image" href="tetris_startup.png" />
-    
-<style type="text/css">
-<!--
-    body {
-        overflow: hidden; 
-        background: #d7d7d7;
-        margin: 0;
-        padding: 0;
-    }
-    #tetris {
-        width: 320px;
-        height: 460px;
-        background-color: #000;
-        margin: 0;
-    }
-    #canvas {
-        top: 20px;
-        width: 200px;
-        height: 440px;
-        background-color: #000;
-        position: relative;
-        color: #fff;
-    }
-    #canvas h1 {margin: 0; padding: 0; text-align: center; font-size: 30px; padding-top: 200px;}
-    .piece {
-        border: 1px solid white;
-        position: absolute;
-    }
-    .square {
-        position: absolute;
-        width: 19px;
-        height: 19px;
-        border: 1px solid white;
-    }
-    .type0 {background-color: #A000F0;}
-    .type1 {background-color: #00F0F0;}
-    .type2 {background-color: #F0A000;}
-    .type3 {background-color: #0000F0;}
-    .type4 {background-color: #00F000;}
-    .type5 {background-color: #F00000;}
-    .type6 {background-color: #F0F000;}
-    #next_shape {position: relative; background-color: #000; border: 1px solid white;width: 105px; height: 110px;}
-    #info {background-color: #000; color: #fff; float: right; width: 110px; height: 420px; padding: 0px;}
-    
-    .control {
-        position:absolute;
-        background-color:transparent;
-        border:1px solid #fff;
-    }
-    .control.persistent {
-        position:absolute;
-        background-color:transparent;
-        border:1px solid #fff;
-    }
-    div.move_left, .move_right {
-        height:98px;
-        width:99px;
-        top:260px;
-    }
-    div.move_left {
-        left:0px;
-    }
-    div.move_right{ 
-        left:101px; 
-    }
-    div.move_down, div.move_show_controls {
-        width:200px;
-        height:98px;
-    }
-    div.move_down {  
-        top:360px;
-        left:0px;
-    }
-    div.move_rotate{
-        height:258px;
-        width:200px;
-        left:0px;
-        top:0;
-    }
-    div.move_pause, div.move_show_controls {
-        width: 105px;
-        height:98px;
-    }
-    div.move_show_controls {
-        top:260px;
-        left:210px;
-    }
-    div.move_pause {
-        top:360px;
-        left:210px;
-    }
-    div.move_pause div, div.move_show_controls div{
-        color:#fff;
-        text-align:center;
-        font-size:150%;
-    }
-    div.for_help {
-        display: none;
-    }
-    div.show_controls div.for_help {
-        color:#fff;
-        display:block;
-        margin:0 auto;
-        text-align:center;
-        vertical-align:middle;
-        /*padding-top:25%;*/
-        font-size:150%;
-    }
-    div.control span {
-        position: relative;
-        top: 25px;
-    }
--->
-</style>
-</head>
+    <link rel="stylesheet" href="tetris.css">
+  </head>
 
-<body>
-<div id="tetris">
-  <div id="info">
-    <div id="next_shape">Loading...</div>
-    <p id="level">Level: <span></span></p>
-    <p id="lines">Lines: <span></span></p>
-    <p id="score">Score: <span></span></p>
-    <p id="time">Time: <span></span></p>
-  </div>
-  <div id="canvas"></div>
-</div>
-
-<div id="controls" class="show_controls">
-    <div class="control move_left"><div class="for_help move_left"><span class="move_left">L</span></div></div>
-    <div class="control move_right"><div class="for_help move_right"><span class="move_right">R</span></div></div>
-    <div class="control move_down"><div class="for_help move_down"><span class="move_down">Down</span></div></div>
-    <div class="control move_rotate"><div class="for_help move_rotate"><span class="move_rotate">Rotate</span></div></div>
-    <div class="control persistent move_pause"><div class="move_pause"><span id="pause_control" class="move_pause">Pause</span></div></div>
-    <div class="control persistent move_show_controls"><div class="move_show_controls"><span class="move_show_controls">Controls</span></div></div>
-</div>
-<script type="text/javascript" src="tetris.js"></script>
-
-</body>
+  <body>
+    <div id="tetris">
+    <!-- <div id="board" style="float: right; border: 1px solid black;">Board<br /></div> -->
+      <div id="info">
+        <div id="next_shape">asdfasdf</div>
+        <p id="level">Level: <span></span></p>
+        <p id="lines">Lines: <span></span></p>
+        <p id="score">Score: <span></span></p>
+        <p id="time">Time: <span></span></p>
+      </div>
+      <div id="canvas"></div>
+    </div>
+    <script type="text/javascript" src="tetris.js"></script>
+  </body>
 </html>
