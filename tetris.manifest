@@ -1,6 +1,15 @@
 CACHE MANIFEST
 
-tetris.css
+css/tetris.css
+css/level1.css
+css/level2.css
+css/level3.css
+
 tetris.html
-tetris.js
+
+js/tetris.js
+
+images/ocean-wallpaper-2.jpg
+images/ocean-wallpaper-3.jpg
+images/ocean-wallpaper-24.jpg
 
