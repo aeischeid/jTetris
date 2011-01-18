@@ -4,7 +4,7 @@ Browsers are perfect platform for games like this
 aesthetics matter in making a game enjoyable
 --------------------------------------------
 
-The game engine was already mostly written. I thought I could add some style for fun.
+The game engine was already written. I thought I could add some style for fun, learn from it, and rewrite it better using modern browser features.
 
 Improvements that would be fun:
 
