@@ -1,0 +1,110 @@
+/* 
+  PROCESSINGJS.COM - BASIC EXAMPLE
+  Delayed Mouse Tracking  
+  MIT License - Hyper-Metrix.com/F1LT3R
+  Native Processing compatible 
+*/  
+
+// Global variables
+float radius = 50.0;
+int X, Y;
+int nX, nY;
+int delay = 16;
+Piece p1,p2,p3,p4,p5,p6;
+
+// Setup the Processing Canvas
+void setup(){
+  size( 320, 640 );
+  strokeWeight( 1 );
+  frameRate( 15 );
+  X = width / 2;
+  Y = width / 2;
+  nX = X;
+  nY = Y;
+  p1 = new Piece();
+  p2 = new Piece();
+  p3 = new Piece();
+  p4 = new Piece();
+  p5 = new Piece();
+  p6 = new Piece();
+}
+
+// Main draw loop
+void draw(){
+  
+  radius = radius + sin( frameCount / 4 );
+  
+  // Track circle to new destination
+  X+=(nX-X)/delay;
+  Y+=(nY-Y)/delay;
+  
+  // Fill canvas grey
+  background( 100 );
+  
+  // Set fill-color to blue
+  fill( 0, 121, 184 );
+  
+  // Set stroke-color white
+  stroke(255); 
+  
+  // Draw circle
+  ellipse( X, Y, radius, radius );
+}
+
+
+// Set circle's next destination
+void mouseMoved(){
+  nX = mouseX;
+  nY = mouseY;  
+}
+
+void getShape(int shape){
+  switch(shape){
+    case 1:
+    
+      break;
+    case 2:
+      
+      break;
+    case 3:
+      
+      break;
+    default:
+      
+  }
+}
+
+class Piece
+{
+  int shape; // 
+  float xpos; // xposition
+  float ypos ; // yposition
+ 
+  Piece(int ishape, float ixp, float iyp) {
+    shape = getShape(ishape);
+    xpos = ixp;
+    ypos = iyp;
+  }
+ 
+  void move (float posX, float posY, float damping) {
+    float dif = ypos - posY;
+    if (abs(dif) > 1) {
+      ypos -= dif/damping;
+    }
+    dif = xpos - posX;
+    if (abs(dif) > 1) {
+      xpos -= dif/damping;
+    }
+  }
+  
+  void rotate () {
+  
+  }
+ 
+  void display() {
+    for (int i=0; i<t; i++) {
+      rect(xpos+(i*(d+w)), ypos, w, height*h);
+    }
+  }
+}
+

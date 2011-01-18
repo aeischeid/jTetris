@@ -16,3 +16,4 @@ Improvements that would be fun:
 *  amimations for completed rows etc.
 *  more challenging speed increments upon level advancements
 *  game settings in UI
+*  making it an 'installable' web-app 
