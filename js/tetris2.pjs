@@ -21,13 +21,13 @@ void setup(){
   X = (width / 2) -10;
   Y = 5;
   
-  
+/*  shapeMode(CENTER);*/
   rectMode(CENTER);
-  s1 = loadShape("data/long.svg");
-  s2 = loadShape("data/t.svg");
+/*  s1 = loadShape("data/long.svg");*/
+/*  s2 = loadShape("data/t.svg");*/
   
-  currentPiece = new Piece();
-  nextPiece = new Piece();
+  currentPiece = new Sshape();
+  nextPiece = getPiece();
 }
 
 // Main draw loop
@@ -35,11 +35,10 @@ void draw(){
   // Fill canvas grey - have to do in draw loop to draw over old piece position
   background( 100 );
   
-/*  shape(s1, 40, 40, 80, 20);*/
-/*  shape(s2, 100, 100, 60, 40);*/
+  // Draw pieces
+  currentPiece.display();
   
-  // Draw rect
-  currentPiece.display()
+  nextPiece.display();
 }
 
 void keyPressed() {
@@ -59,17 +58,28 @@ void keyPressed() {
   }
 }
 
+void getPiece() {
+  int shape = int(random(1,3));
+  switch(shape){
+    case 1:
+      return new Rectangle();
+      break;
+    case 2:
+      return new Lshape();
+      break;
+    case 3:
+      return new Sshape();
+      break;
+    default:
+      println("WTF");
+  }
+}
+
 class Piece
 {
-  int shape, h, w; //
   float xpos, ypos, rotation, nRotation; // x & y position, new and old rotation angles
   
- 
   Piece() {
-    //shape = int(random(1,4);
-    //getShape(shape);
-    h = 20;
-    w = 80;
     rotation = 0.0;
     nRotation = 0.0;
     xpos = startX;
@@ -84,25 +94,15 @@ class Piece
   void turn() {
     nRotation += HALF_PI;
   }
+}
+
+class Rectangle extends Piece {
+  int w, h; // width & height
   
-/*  void getShape(int shape){*/
-/*    switch(shape){*/
-/*      case 1:*/
-/*        rect(50,5,20,20);*/
-/*        break;*/
-/*      case 2:*/
-/*        rect(50,5,20,40);*/
-/*        break;*/
-/*      case 3:*/
-/*        rect(50,5,20,60);*/
-/*        break;*/
-/*      case 4:*/
-/*        rect(50,5,40,40);*/
-/*        break;*/
-/*      default:*/
-/*        */
-/*    }*/
-/*  }*/
+  Rectangle() {
+    w = 80;
+    h = 20;
+  }
   
   void display() {
     // Set fill-color to blue
@@ -120,7 +120,34 @@ class Piece
       }
     }
     rotate(rotation);
-    shapeMode(CORNERS);
+    // Set stroke-color white
+    stroke(255);
+    rect(0, 0, w, h);
+  }
+}
+
+class Lshape extends Piece {
+  Lshape() {
+  
+  }
+  
+  void display() {
+    // Set fill-color to blue
+    fill( 0, 121, 184 );
+    // Move
+    translate(xpos, ypos);
+    // animate the rotation
+    if(nRotation > rotation){
+      float dif = nRotation - rotation;
+      if(abs(dif) > 0.2) {
+        rotation += dif * easing;
+      }
+      else {
+        rotation = nRotation;
+      }
+    }
+    rotate(rotation);
+    shapeMode(CENTER);
     beginShape();
     vertex(0, 0);
     vertex(20, 0);
@@ -129,9 +156,42 @@ class Piece
     vertex(40, 40);
     vertex(0, 40);
     endShape(CLOSE);
-/*    // Set stroke-color white*/
-/*    stroke(255);*/
-/*    rect(0, 0, w, h);*/
   }
 }
+
+class Sshape extends Piece {
+  Sshape() {
+  
+  }
+  
+   void display() {
+    // Set fill-color to blue
+    fill( 0, 121, 184 );
+    // Move
+    translate(xpos, ypos);
+    // animate the rotation
+    if(nRotation > rotation){
+      float dif = nRotation - rotation;
+      if(abs(dif) > 0.2) {
+        rotation += dif * easing;
+      }
+      else {
+        rotation = nRotation;
+      }
+    }
+    rotate(rotation);
+    shapeMode(CENTER);
+    beginShape();
+    vertex(0, 0);
+    vertex(40, 0);
+    vertex(40, 20);
+    vertex(60, 20);
+    vertex(60, 40);
+    vertex(20, 40);
+    vertex(20, 20);
+    vertex(0, 20);
+    endShape(CLOSE);
+  }
+}
+
 
