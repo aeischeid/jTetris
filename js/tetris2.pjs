@@ -1,26 +1,25 @@
 /* 
   PROCESSINGJS.COM - BASIC EXAMPLE
-  Delayed Mouse Tracking  
-  MIT License - Hyper-Metrix.com/F1LT3R
   Native Processing compatible 
 */  
 
 // Global variables
 float radius = 50.0;
 int X, Y;
-int nX, nY;
-int delay = 16;
+int nX, nY, rotate; 
+int delay = 4;
 Piece p1,p2,p3,p4,p5,p6;
 
 // Setup the Processing Canvas
 void setup(){
-  size( 320, 640 );
+  size( 250, 500 );
   strokeWeight( 1 );
-  frameRate( 15 );
-  X = width / 2;
-  Y = width / 2;
+  frameRate( 30 );
+  X = (width / 2) -10;
+  Y = 5;
   nX = X;
   nY = Y;
+  rotate = 0
   p1 = new Piece();
   p2 = new Piece();
   p3 = new Piece();
@@ -31,10 +30,7 @@ void setup(){
 
 // Main draw loop
 void draw(){
-  
-  radius = radius + sin( frameCount / 4 );
-  
-  // Track circle to new destination
+  // Track shape to new destination
   X+=(nX-X)/delay;
   Y+=(nY-Y)/delay;
   
@@ -47,27 +43,53 @@ void draw(){
   // Set stroke-color white
   stroke(255); 
   
-  // Draw circle
-  ellipse( X, Y, radius, radius );
+  // Draw rect
+  rect( X,Y, 20, 60 );
+  if(rotate == 1){
+    rotate(90);
+    rotate = 0;
+  }
 }
 
 
 // Set circle's next destination
-void mouseMoved(){
-  nX = mouseX;
-  nY = mouseY;  
+/*void mouseMoved(){*/
+/*  nX = mouseX;*/
+/*  nY = mouseY;  */
+/*}*/
+
+void keyPressed() {
+  println("pressed " + key + " " + keyCode);
+  if(int(key) == "LEFT"){ 
+    println("LEFT");
+  }
+  if(keyCode == 37){
+    nX = X - 20;
+  }
+  if(keyCode == 39){
+    nX = X + 20;
+  }
+/*  if(keyCode == 38){*/
+/*    rotate = 1;*/
+/*  }*/
+  if(keyCode == 40){
+    nY = Y + 20;
+  }
 }
 
 void getShape(int shape){
   switch(shape){
     case 1:
-    
+      rect(50,5,20,20);
       break;
     case 2:
-      
+      rect(50,5,20,40);
       break;
     case 3:
-      
+      rect(50,5,20,60);
+      break;
+    case 4:
+      rect(50,5,40,40);
       break;
     default:
       
@@ -81,7 +103,7 @@ class Piece
   float ypos ; // yposition
  
   Piece(int ishape, float ixp, float iyp) {
-    shape = getShape(ishape);
+    shape = ishape;
     xpos = ixp;
     ypos = iyp;
   }
@@ -97,10 +119,6 @@ class Piece
     }
   }
   
-  void rotate () {
-  
-  }
- 
   void display() {
     for (int i=0; i<t; i++) {
       rect(xpos+(i*(d+w)), ypos, w, height*h);
