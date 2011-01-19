@@ -1,14 +1,13 @@
 /* 
-  PROCESSINGJS.COM - BASIC EXAMPLE
+  PROCESSINGJS.COM
   Native Processing compatible 
 */  
 
 // Global variables
-float radius = 50.0;
-int X, Y;
-int nX, nY, rotate; 
+int X, Y, nX, nY; 
 int delay = 4;
-Piece p1,p2,p3,p4,p5,p6;
+int rotate = 0;
+Piece p1,p2,p3,p4;
 
 // Setup the Processing Canvas
 void setup(){
@@ -19,13 +18,10 @@ void setup(){
   Y = 5;
   nX = X;
   nY = Y;
-  rotate = 0
-  p1 = new Piece();
-  p2 = new Piece();
-  p3 = new Piece();
-  p4 = new Piece();
-  p5 = new Piece();
-  p6 = new Piece();
+  p1 = new Piece(1);
+  p2 = new Piece(2);
+  p3 = new Piece(3);
+  p4 = new Piece(4);
 }
 
 // Main draw loop
@@ -35,7 +31,7 @@ void draw(){
   Y+=(nY-Y)/delay;
   
   // Fill canvas grey
-  background( 100 );
+  background( 100,100,100, 0.7 );
   
   // Set fill-color to blue
   fill( 0, 121, 184 );
@@ -106,6 +102,7 @@ class Piece
     shape = ishape;
     xpos = ixp;
     ypos = iyp;
+    getShape(shape);
   }
  
   void move (float posX, float posY, float damping) {
