@@ -26,7 +26,7 @@ void setup(){
 /*  s1 = loadShape("data/long.svg");*/
 /*  s2 = loadShape("data/t.svg");*/
   
-  currentPiece = new Sshape();
+  currentPiece = getPiece();
   nextPiece = getPiece();
 }
 
@@ -133,7 +133,7 @@ class Lshape extends Piece {
   
   void display() {
     // Set fill-color to blue
-    fill( 0, 121, 184 );
+    fill( 40, 200, 90 );
     // Move
     translate(xpos, ypos);
     // animate the rotation
@@ -164,9 +164,9 @@ class Sshape extends Piece {
   
   }
   
-   void display() {
-    // Set fill-color to blue
-    fill( 0, 121, 184 );
+  void display() {
+    // Set fill-color
+    fill( 200, 40, 40 );
     // Move
     translate(xpos, ypos);
     // animate the rotation
