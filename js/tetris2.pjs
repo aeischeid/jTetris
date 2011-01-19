@@ -6,120 +6,100 @@
 // Global variables
 int X, Y, nX, nY; 
 int delay = 4;
-int rotate = 0;
-Piece p1,p2,p3,p4;
+Piece currentPiece, nextPiece;
 
 // Setup the Processing Canvas
 void setup(){
+  // Set canvas size
   size( 250, 500 );
   strokeWeight( 1 );
   frameRate( 30 );
+  //set where pieces begin to drop from
+  startX = (width/2); 
+  startY = 10;
   X = (width / 2) -10;
   Y = 5;
-  nX = X;
-  nY = Y;
-  p1 = new Piece(1);
-  p2 = new Piece(2);
-  p3 = new Piece(3);
-  p4 = new Piece(4);
+  currentPiece = new Piece();
+  nextPiece = new Piece();
 }
 
 // Main draw loop
 void draw(){
-  // Track shape to new destination
-  X+=(nX-X)/delay;
-  Y+=(nY-Y)/delay;
-  
-  // Fill canvas grey
-  background( 100,100,100, 0.7 );
-  
-  // Set fill-color to blue
-  fill( 0, 121, 184 );
-  
-  // Set stroke-color white
-  stroke(255); 
-  
+  // Fill canvas grey - have to do in draw loop to draw over old piece position
+  background( 100 );
   // Draw rect
-  rect( X,Y, 20, 60 );
-  if(rotate == 1){
-    rotate(90);
-    rotate = 0;
-  }
+  currentPiece.display()
 }
-
-
-// Set circle's next destination
-/*void mouseMoved(){*/
-/*  nX = mouseX;*/
-/*  nY = mouseY;  */
-/*}*/
 
 void keyPressed() {
   println("pressed " + key + " " + keyCode);
-  if(int(key) == "LEFT"){ 
-    println("LEFT");
-  }
+  // 37,38,39,40 correspond to left,up,right,down
   if(keyCode == 37){
-    nX = X - 20;
+    currentPiece.move(-20,0);
   }
   if(keyCode == 39){
-    nX = X + 20;
+    currentPiece.move(20,0);
   }
-/*  if(keyCode == 38){*/
-/*    rotate = 1;*/
-/*  }*/
+  if(keyCode == 38){
+    currentPiece.turn();
+  }
   if(keyCode == 40){
-    nY = Y + 20;
-  }
-}
-
-void getShape(int shape){
-  switch(shape){
-    case 1:
-      rect(50,5,20,20);
-      break;
-    case 2:
-      rect(50,5,20,40);
-      break;
-    case 3:
-      rect(50,5,20,60);
-      break;
-    case 4:
-      rect(50,5,40,40);
-      break;
-    default:
-      
+    currentPiece.move(0,20);
   }
 }
 
 class Piece
 {
-  int shape; // 
-  float xpos; // xposition
-  float ypos ; // yposition
+  int shape, h, w; //
+  float xpos, ypos, rotation; // x & y position
  
-  Piece(int ishape, float ixp, float iyp) {
-    shape = ishape;
-    xpos = ixp;
-    ypos = iyp;
-    getShape(shape);
+  Piece() {
+    //shape = int(random(1,4);
+    //getShape(shape);
+    h = 20;
+    w = 60;
+    rotation = 0.0;
+    xpos = startX;
+    ypos = startY;
   }
  
-  void move (float posX, float posY, float damping) {
-    float dif = ypos - posY;
-    if (abs(dif) > 1) {
-      ypos -= dif/damping;
-    }
-    dif = xpos - posX;
-    if (abs(dif) > 1) {
-      xpos -= dif/damping;
-    }
+  void move(int posX, int posY) {
+    xpos += posX;
+    ypos += posY;
   }
   
+  void turn() {
+    rotation += HALF_PI;
+  }
+  
+/*  void getShape(int shape){*/
+/*    switch(shape){*/
+/*      case 1:*/
+/*        rect(50,5,20,20);*/
+/*        break;*/
+/*      case 2:*/
+/*        rect(50,5,20,40);*/
+/*        break;*/
+/*      case 3:*/
+/*        rect(50,5,20,60);*/
+/*        break;*/
+/*      case 4:*/
+/*        rect(50,5,40,40);*/
+/*        break;*/
+/*      default:*/
+/*        */
+/*    }*/
+/*  }*/
+  
   void display() {
-    for (int i=0; i<t; i++) {
-      rect(xpos+(i*(d+w)), ypos, w, height*h);
-    }
+    // Set fill-color to blue
+    fill( 0, 121, 184 );
+    translate(xpos, ypos);
+    rotate(rotation);
+    // Set stroke-color white
+    stroke(255);
+    rectMode(CENTER);
+    rect(0, 0, w, h);
   }
 }
 
