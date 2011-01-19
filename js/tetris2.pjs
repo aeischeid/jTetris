@@ -5,13 +5,14 @@
 
 // Global variables
 int X, Y, nX, nY; 
-int delay = 4;
+float easing = 0.4;
 Piece currentPiece, nextPiece;
+PShape s;
 
 // Setup the Processing Canvas
 void setup(){
   // Set canvas size
-  size( 250, 500 );
+  size( 240, 500 );
   strokeWeight( 1 );
   frameRate( 30 );
   //set where pieces begin to drop from
@@ -19,6 +20,12 @@ void setup(){
   startY = 10;
   X = (width / 2) -10;
   Y = 5;
+  
+  
+  rectMode(CENTER);
+  s1 = loadShape("data/long.svg");
+  s2 = loadShape("data/t.svg");
+  
   currentPiece = new Piece();
   nextPiece = new Piece();
 }
@@ -27,12 +34,16 @@ void setup(){
 void draw(){
   // Fill canvas grey - have to do in draw loop to draw over old piece position
   background( 100 );
+  
+/*  shape(s1, 40, 40, 80, 20);*/
+/*  shape(s2, 100, 100, 60, 40);*/
+  
   // Draw rect
   currentPiece.display()
 }
 
 void keyPressed() {
-/*  println("pressed " + key + " " + keyCode);*/
+  println("pressed " + key + " " + keyCode);
   // 37,38,39,40 correspond to left,up,right,down
   if(keyCode == 37){
     currentPiece.move(-20,0);
@@ -51,7 +62,8 @@ void keyPressed() {
 class Piece
 {
   int shape, h, w; //
-  float xpos, ypos, rotation, nRotation; // x & y position
+  float xpos, ypos, rotation, nRotation; // x & y position, new and old rotation angles
+  
  
   Piece() {
     //shape = int(random(1,4);
@@ -71,8 +83,6 @@ class Piece
   
   void turn() {
     nRotation += HALF_PI;
-    println("new rotation angle"+nRotation);
-    println("old rotation angle"+rotation);
   }
   
 /*  void getShape(int shape){*/
@@ -102,19 +112,26 @@ class Piece
     // animate the rotation
     if(nRotation > rotation){
       float dif = nRotation - rotation;
-      if(abs(dif) > 1) {
-        rotation += dif/8;
+      if(abs(dif) > 0.2) {
+        rotation += dif * easing;
       }
       else {
         rotation = nRotation;
       }
     }
-    
     rotate(rotation);
-    // Set stroke-color white
-    stroke(255);
-    rectMode(CENTER);
-    rect(0, 0, w, h);
+    shapeMode(CORNERS);
+    beginShape();
+    vertex(0, 0);
+    vertex(20, 0);
+    vertex(20, 20);
+    vertex(40, 20);
+    vertex(40, 40);
+    vertex(0, 40);
+    endShape(CLOSE);
+/*    // Set stroke-color white*/
+/*    stroke(255);*/
+/*    rect(0, 0, w, h);*/
   }
 }
 

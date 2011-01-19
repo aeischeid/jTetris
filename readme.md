@@ -9,7 +9,7 @@ The game engine was already written. I thought I could add some style for fun, l
 Improvements that would be fun:
 
 *  title screen
-*  rewrite to use canvas elements
+*  rewrite to canvas elements (and svg?)
 *  Changing style/background based on levels
 *  using browser database to record high scores
 *  adding music
