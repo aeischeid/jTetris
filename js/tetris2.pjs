@@ -32,7 +32,7 @@ void draw(){
 }
 
 void keyPressed() {
-  println("pressed " + key + " " + keyCode);
+/*  println("pressed " + key + " " + keyCode);*/
   // 37,38,39,40 correspond to left,up,right,down
   if(keyCode == 37){
     currentPiece.move(-20,0);
@@ -51,14 +51,15 @@ void keyPressed() {
 class Piece
 {
   int shape, h, w; //
-  float xpos, ypos, rotation; // x & y position
+  float xpos, ypos, rotation, nRotation; // x & y position
  
   Piece() {
     //shape = int(random(1,4);
     //getShape(shape);
     h = 20;
-    w = 60;
+    w = 80;
     rotation = 0.0;
+    nRotation = 0.0;
     xpos = startX;
     ypos = startY;
   }
@@ -69,7 +70,9 @@ class Piece
   }
   
   void turn() {
-    rotation += HALF_PI;
+    nRotation += HALF_PI;
+    println("new rotation angle"+nRotation);
+    println("old rotation angle"+rotation);
   }
   
 /*  void getShape(int shape){*/
@@ -94,7 +97,19 @@ class Piece
   void display() {
     // Set fill-color to blue
     fill( 0, 121, 184 );
+    // Move
     translate(xpos, ypos);
+    // animate the rotation
+    if(nRotation > rotation){
+      float dif = nRotation - rotation;
+      if(abs(dif) > 1) {
+        rotation += dif/8;
+      }
+      else {
+        rotation = nRotation;
+      }
+    }
+    
     rotate(rotation);
     // Set stroke-color white
     stroke(255);
