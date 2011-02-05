@@ -12,16 +12,16 @@ PShape s;
 // Setup the Processing Canvas
 void setup(){
   // Set canvas size
-  size( 240, 500 );
+  size(240,500);
   strokeWeight( 1 );
   frameRate( 30 );
   //set where pieces begin to drop from
-  startX = (width/2); 
+  startX = (width/2)+10; 
   startY = 10;
   X = (width / 2) -10;
   Y = 5;
   
-/*  shapeMode(CENTER);*/
+  shapeMode(CENTER);
   rectMode(CENTER);
 /*  s1 = loadShape("data/long.svg");*/
 /*  s2 = loadShape("data/t.svg");*/
@@ -38,11 +38,11 @@ void draw(){
   // Draw pieces
   currentPiece.display();
   
-  nextPiece.display();
+  //nextPiece.display();
 }
 
 void keyPressed() {
-  println("pressed " + key + " " + keyCode);
+  //println("pressed " + key + " " + keyCode);
   // 37,38,39,40 correspond to left,up,right,down
   if(keyCode == 37){
     currentPiece.move(-20,0);
@@ -59,7 +59,8 @@ void keyPressed() {
 }
 
 void getPiece() {
-  int shape = int(random(1,3));
+  int shape = int(random(1, 4));
+  println("shape #: "+shape);
   switch(shape){
     case 1:
       return new Rectangle();
@@ -78,26 +79,34 @@ void getPiece() {
 class Piece
 {
   float xpos, ypos, rotation, nRotation; // x & y position, new and old rotation angles
+  int w, h, nW, nH; // width and height of piece for collision constraints 
   
   Piece() {
     rotation = 0.0;
     nRotation = 0.0;
     xpos = startX;
     ypos = startY;
+    w = 40;
+    h = 40;
   }
  
   void move(int posX, int posY) {
     xpos += posX;
     ypos += posY;
+    xpos = constrain(xpos, this.w/2, width-this.w/2);
+    ypos = constrain(ypos, 0, height-this.h/2);
   }
   
   void turn() {
     nRotation += HALF_PI;
+    nH = w;
+    nW = h;
+    w = nW;
+    h = nH;
   }
 }
 
 class Rectangle extends Piece {
-  int w, h; // width & height
   
   Rectangle() {
     w = 80;
@@ -108,6 +117,8 @@ class Rectangle extends Piece {
     // Set fill-color to blue
     fill( 0, 121, 184 );
     // Move
+    println(this.w);
+    println(this.h);
     translate(xpos, ypos);
     // animate the rotation
     if(nRotation > rotation){
@@ -120,21 +131,22 @@ class Rectangle extends Piece {
       }
     }
     rotate(rotation);
-    // Set stroke-color white
-    stroke(255);
     rect(0, 0, w, h);
   }
 }
 
 class Lshape extends Piece {
   Lshape() {
-  
+    w = 40;
+    h = 40;
   }
   
   void display() {
     // Set fill-color to blue
     fill( 40, 200, 90 );
     // Move
+    println(this.w);
+    println(this.h);
     translate(xpos, ypos);
     // animate the rotation
     if(nRotation > rotation){
@@ -147,7 +159,6 @@ class Lshape extends Piece {
       }
     }
     rotate(rotation);
-    shapeMode(CENTER);
     beginShape();
     vertex(0, 0);
     vertex(20, 0);
@@ -161,13 +172,16 @@ class Lshape extends Piece {
 
 class Sshape extends Piece {
   Sshape() {
-  
+    w = 60;
+    h = 40;
   }
   
   void display() {
     // Set fill-color
     fill( 200, 40, 40 );
     // Move
+    println(this.w);
+    println(this.h);
     translate(xpos, ypos);
     // animate the rotation
     if(nRotation > rotation){
@@ -180,7 +194,6 @@ class Sshape extends Piece {
       }
     }
     rotate(rotation);
-    shapeMode(CENTER);
     beginShape();
     vertex(0, 0);
     vertex(40, 0);
