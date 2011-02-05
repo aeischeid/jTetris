@@ -207,4 +207,31 @@ class Sshape extends Piece {
   }
 }
 
+/*class CompoundPiece {*/
+/*  CompoundPiece() {*/
+/*    Block block1;*/
+/*    Block block2;*/
+/*    Block block3;*/
+/*    Block block4;*/
+/*  }*/
+/*  */
+/*  void display(){*/
+/*    block1.display();*/
+/*    block2.display();*/
+/*    block3.display();*/
+/*    block4.display();*/
+/*  }*/
+/*}*/
 
+/*class Block {*/
+/*  int x, y, w, h;*/
+/*  */
+/*  Block(){*/
+/*    w = 20;*/
+/*    h = 20;*/
+/*  }*/
+/*  */
+/*  void display(int x, int y) {*/
+/*    rect(x, y, w, h);*/
+/*  }*/
+/*}*/
